@@ -11,7 +11,9 @@ public class ShipBoardPanel extends BoardPanel {
         super();
         this.board = board;
     }
-
+    public void setHit(int row, int column){
+        board.setHit(row, column);
+    }
     public boolean addShip(Ship ship, int xPos, int yPos){
         int[] position = registerClick(xPos, yPos);
         if(savedPosition==null) {
@@ -52,6 +54,11 @@ public class ShipBoardPanel extends BoardPanel {
                 if(shipChar != ' '){
                     g2d.drawString(String.valueOf(shipChar), 5*getWidth()/40 + j*boardWidth/10, 6*getHeight()/40 +i*boardHeight/10);
                     System.out.println(count);
+                }
+                if(board.beenHit(i, j)){
+                    g2d.setColor(Color.RED);
+                    g2d.drawLine(getWidth()/10+boardWidth/40+i*boardWidth/10, getHeight()/10+boardHeight/40+j*boardHeight/10, getWidth()/10+3*boardWidth/40+i*boardWidth/10, getHeight()/10+3*boardHeight/40+j*boardHeight/10);
+                    g2d.drawLine(getWidth()/10+3*boardWidth/40+i*boardWidth/10, getHeight()/10+boardHeight/40+j*boardHeight/10, getWidth()/10+boardWidth/40+i*boardWidth/10, getHeight()/10+3*boardHeight/40+j*boardHeight/10);
                 }
                 count++;
             }

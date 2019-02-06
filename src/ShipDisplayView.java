@@ -8,7 +8,7 @@ public class ShipDisplayView extends JFrame {
     }
 
     private void init(ShipBoardPanel panel) {
-        this.setSize(new Dimension(400, 400));
+        this.setSize(400, 400);
         this.setContentPane(panel);
         this.pack();
         this.setVisible(true);

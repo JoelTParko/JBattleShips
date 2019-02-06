@@ -35,7 +35,7 @@ public class Controller {
             nextShot = view.getNextShot();
             if(nextShot != null && !board.beenHit(nextShot[0], nextShot[1])){
                 board.setHit(nextShot[0], nextShot[1]);
-                view.log("Shot fired at sector ("+(nextShot[0]+1)+","+(nextShot[1]+1)+")");
+                view.log("Shot fired at sector ("+(nextShot[1]+1)+","+(nextShot[0]+1)+")");
                 if(checkShipHit(nextShot)){
                     view.log("It's a hit!\n");
                     view.setHitType(nextShot[1], nextShot[0], true); //Rows are [1], columns are [0]. Oops
