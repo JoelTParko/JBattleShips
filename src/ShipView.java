@@ -1,16 +1,19 @@
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 
-public class ShipView extends JFrame {
+public class ShipView extends JDialog {
 
     ShipPanel selectedPanel = null;
     Board board;
 
     public ShipView(Board board){
-        super("Your Ships");
+        super((Window)null);
+        setModal(true);
         this.board = board;
         init();
     }
@@ -56,9 +59,26 @@ public class ShipView extends JFrame {
         superPanel.add(shipPanel, BorderLayout.EAST);
         superPanel.add(boardPanel, BorderLayout.CENTER);
 
+        superPanel.add(new JButton(new AbstractAction("Done") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(allShipsPlaced()){
+                    dispose();
+                }
+            }
+        }), BorderLayout.SOUTH);
 
         this.pack();
         this.setVisible(true);
+    }
+
+    private boolean allShipsPlaced(){
+        for (int i = 0; i < 5; i++) {
+            ShipPanel currentShip = (ShipPanel)((JPanel)this.getContentPane().getComponent(1)).getComponent(i);
+            if(!currentShip.isPlaced())
+                return false;
+        }
+        return true;
     }
 
     private void deselectPanel(){

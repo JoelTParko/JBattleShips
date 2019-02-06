@@ -26,13 +26,7 @@ public class Controller {
     private void playGame()throws InterruptedException{
         Board playerBoard = new Board(10);
         ShipView shipview = new ShipView(playerBoard);
-
-
-
-
-
-        /*
-        View view = new View(10);
+        View view = new View(10, playerBoard);
         int shipsLeft = Ship.values().length;
         Ship s;
         boolean gameWon = false;
@@ -45,7 +39,7 @@ public class Controller {
                 if(checkShipHit(nextShot)){
                     view.log("It's a hit!\n");
                     view.setHitType(nextShot[1], nextShot[0], true); //Rows are [1], columns are [0]. Oops
-                    s = getTile(board.getTile(nextShot[0], nextShot[1]));
+                    s = getShip(board.getTile(nextShot[0], nextShot[1]));
                     s.shipHit();
                     if(s.getHealth()==0) {
                         System.out.println("You just sunk the " + s.toString());
@@ -65,7 +59,6 @@ public class Controller {
             Thread.sleep(50);
         }
         view.log("Congratulations\n You have won BattleShips!!");
-        */
     }
 
     private Ship getShip(char s){

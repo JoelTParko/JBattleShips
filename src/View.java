@@ -9,9 +9,11 @@ import java.awt.event.MouseListener;
 public class View extends JFrame {
 
     private int[] sectorLocation = null;
+    Board playerBoard;
 
-    public View(int size){
+    public View(int size, Board playerBoard){
         super("BattleShips");
+        this.playerBoard = playerBoard;
         init(size);
     }
     public void init(int size){
@@ -37,8 +39,12 @@ public class View extends JFrame {
         toolsPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
-        JButton button = new JButton("Your Ships");
-        button.addActionListener(new WindowListener());
+        JButton button = new JButton(new AbstractAction("Your Ships") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShipDisplayView view = new ShipDisplayView(new ShipBoardPanel(playerBoard));
+            }
+        });
         c.anchor = GridBagConstraints.LAST_LINE_END;
         c.weightx = 1;
         c.gridx = 1;
